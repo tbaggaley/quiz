@@ -1,0 +1,7 @@
+extends layout.pug
+
+block content
+  h2 #{question.text}
+  form(action=continueURL)
+    input(name="answer")
+    input(type="submit")

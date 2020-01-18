@@ -1,0 +1,10 @@
+extends layout.pug
+
+block content
+  h2 #{quiz.title}
+  h3 Questions
+  ul
+    each question in quiz.questions
+      li #{question.text} -> #{question.answer}
+    a(href=`${continueURL}?addQuestion=1`) add a new question
+  a(href=`${continueURL}?playQuiz=1`) play quiz

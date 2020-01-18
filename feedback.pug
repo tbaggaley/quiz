@@ -1,0 +1,12 @@
+extends layout.pug
+
+block content
+  if (question.answer == userAnswer)
+    h2 Well done!
+    p You got it right.
+  else
+    h2 Oops!
+    p That's not quite right.
+    p The right answer was: #{question.answer}
+  p You answered in #{responseTime}s.
+  a(href=continueURL) Continue!

@@ -1,0 +1,9 @@
+extends layout.pug
+
+block content
+  form(action=continueURL)
+    label Question:
+      input(name="question")
+    label Answer:
+      input(name="answer")
+    input(type="submit")

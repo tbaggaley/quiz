@@ -6,5 +6,10 @@ block content
   ul
     each question in quiz.questions
       li #{question.text} -> #{question.answer}
-    a(href=`${continueURL}?addQuestion=1`) add a new question
+    h4 Add a new question...
+    ul
+      li
+        a(href=`${continueURL}?addQuestion=1&type=free`) free text
+      li
+        a(href=`${continueURL}?addQuestion=1&type=multiple`) multiple choice
   a(href=`${continueURL}?playQuiz=1`) play quiz

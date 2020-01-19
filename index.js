@@ -2,11 +2,13 @@ const express = require('express');
 const pug = require('pug');
 const uuidv4 = require('uuid/v4');
 
+const app = express();
+
+// Continuation handling logic
+
 const MAX_CONTINUATIONS = 100;
 const continuations = {};
 const uuids = [];
-
-const app = express();
 
 function sendSuspend(res, responseGenerator) {
   const continuationID = uuidv4();
@@ -46,6 +48,8 @@ app.all('/continue/:continuationID', (req, res) => {
   else res.send("Sorry, your session has expired or is invalid.");
 });
 
+// Application logic
+
 app.get("/new", async function(req, res) {
   [req, res] = await sendSuspendTemplate(res, "new-quiz.pug", { title: "Create a new quiz" });
   const quiz = { title: req.query.quizTitle, questions: [] };
@@ -54,8 +58,30 @@ app.get("/new", async function(req, res) {
     [req, res] = await sendSuspendTemplate(res, "quiz-overview.pug", { quiz: quiz, title: "Overview" });
 
     if(req.query.addQuestion) {
-      [req, res] = await sendSuspendTemplate(res, "add-question.pug", { quiz: quiz, title: "Add a new question" });
-      quiz.questions.push({ text: req.query.question, answer: req.query.answer });
+      switch(req.query.type) {
+        case "free":
+          [req, res] = await sendSuspendTemplate(res, "add-question.pug", {
+             quiz: quiz, title: "Add a new question"
+          });
+          quiz.questions.push({ text: req.query.question, answer: req.query.answer });
+          break;
+
+        case "multiple":
+          const question = { type: 'multiple', answers: [] };
+
+          while(true) {
+            [req, res] = await sendSuspendTemplate(res, "add-multiple-choice.pug", {
+              quiz: quiz, title: "Add a multiple choice question", question: question
+            });
+            if(req.query.answer !== "") {
+              question.answers.push({ text: req.query.answer, correct: req.query.correct });
+            } else break;
+          }
+
+          quiz.questions.push(question);
+          break;
+      }
+
       continue;
     } else if (req.query.playQuiz) {
       playQuiz(res, quiz);

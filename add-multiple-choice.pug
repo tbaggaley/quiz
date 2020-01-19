@@ -1,0 +1,16 @@
+extends layout.pug
+
+block content
+  form(action=continueURL)
+    label Question:
+      input(name="question")
+    label Answers:
+      ul
+        each i in [1,2,3,4,5]
+          li
+            label Choice:
+              input(name=`choice${i}`)
+            label - correct?
+              input(name=`choice${i}_correct`)
+            input(name="correct" type="checkbox")
+    input(type="submit" value="Add question")

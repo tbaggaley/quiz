@@ -1,0 +1,10 @@
+extends layout.pug
+
+block content
+  h2 #{question.text}
+  form.list-group(action=continueURL)
+    each choice, index in question.choices
+      div.list-group-item
+        label(for="answer") #{choice} 
+        input.form-check(type="radio" value=`${index+1}` name="answer")
+    input.btn.btn-primary(type="submit")

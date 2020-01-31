@@ -1,0 +1,9 @@
+extends layout.pug
+
+block content
+  form(action=`${continueURL}` method="POST" encType="multipart/form-data")
+    section.form-group
+      label(for="file") Choose a quiz file to upload:
+      input.form-control-file(name="file" type="file" accept=".quiz,.json,application/quiz,application/json")
+      input.btn.btn-primary(type="submit" value="Upload")
+      a.btn(href="/") Cancel and return to main menu

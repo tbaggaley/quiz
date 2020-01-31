@@ -10,7 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "escape-html": "^1.0.3",
     "express": "^4.17.1",
+    "express-fileupload": "^1.1.6",
     "pug": "^2.0.4",
     "uuid": "^3.3.3"
   }

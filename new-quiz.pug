@@ -3,5 +3,5 @@ extends layout.pug
 block content
   form(action=continueURL)
     h3 So what do you want to call the quiz?
-    input(name="quizTitle")
-    input(type="submit")
+    input.form-control(name="quizTitle" required)
+    input.btn.btn-primary(type="submit" value="Create quiz")

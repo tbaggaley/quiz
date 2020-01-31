@@ -1,12 +1,13 @@
 extends layout.pug
 
 block content
-  if (question.answer == userAnswer)
+  if correct
     h2 Well done!
     p You got it right.
   else
     h2 Oops!
     p That's not quite right.
-    p The right answer was: #{question.answer}
+    p The right answer was: #{question.answer}.
+    p Placeholder: detailed feedback here
   p You answered in #{responseTime}s.
-  a(href=continueURL) Continue!
+  a.btn.btn-primary(href=continueURL) Continue!

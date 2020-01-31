@@ -3,7 +3,7 @@ extends layout.pug
 block content
   form(action=continueURL)
     label Question:
-      input(name="question")
+      input(name="question" required)
     label Answer:
-      input(name="answer")
+      input(name="answer" required)
     input(type="submit")

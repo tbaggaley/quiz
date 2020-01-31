@@ -1,0 +1,8 @@
+extends layout.pug
+
+block content
+  h2 Finished!
+  h3 You got #{answersCorrect} out of #{totalQuestions} questions correct!
+  h3 You took #{totalTime} seconds to complete the quiz. 
+  a.btn.btn-primary(href=continueURL) Play again!
+  a.btn(href=`${continueURL}?overview=1`) Return to overview

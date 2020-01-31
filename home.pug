@@ -1,6 +1,10 @@
 extends layout.pug
 
 block content
+  p Experimental stateful web app using pseudo-continuations in nodeJS
+  h2 Menu
   ul
-    li: a(href="/new") Create a new quiz
-    li: a(href="/load") Load a quiz from file
+    li
+      a.btn(href="/new" role="button") Create a new quiz
+    li
+      a.btn(href="/load" role="button") Load a quiz from file

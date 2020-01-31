@@ -3,13 +3,18 @@ extends layout.pug
 block content
   h2 #{quiz.title}
   h3 Questions
-  ul
+  ul.list-group
     each question in quiz.questions
-      li #{question.text} -> #{question.answer}
-    h4 Add a new question...
-    ul
-      li
-        a(href=`${continueURL}?addQuestion=1&type=free`) free text
-      li
-        a(href=`${continueURL}?addQuestion=1&type=multiple`) multiple choice
-  a(href=`${continueURL}?playQuiz=1`) play quiz
+      li.list-group-item
+        small #{questionTypes[question.type].name}
+        p !{questionTypes[question.type].overview(question)}
+    h4 Add a new question
+    div.list-group
+      each questionType in questionTypes
+        a.list-group-item(href=`${continueURL}?addQuestion=1&type=${questionType.type}`)
+          h4 #{questionType.name}
+          p #{questionType.description}
+  nav.btn-group
+    a.btn.btn-primary(role="button" href=`${continueURL}?playQuiz=1`) Preview quiz
+    a.btn(role="button" download=`${quiz.title}.quiz` href=`${downloadLink}`) Save quiz to file
+    a.btn(role="button" href="/") Close and return to main menu
